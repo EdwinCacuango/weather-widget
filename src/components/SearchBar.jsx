@@ -13,6 +13,7 @@ const SearchBar = ({ setChange }) => {
   const inputSubmit = (e) => {
     e.preventDefault();
     setChange(city);
+    setCity("");
   };
   return (
     <form
