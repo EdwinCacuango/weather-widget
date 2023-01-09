@@ -5,9 +5,7 @@ const SearchBar = ({ setChange }) => {
   const [city, setCity] = useState("");
 
   const inputHandler = (e) => {
-    if (e.target.value != "") {
-      setCity(e.target.value);
-    }
+    setCity(e.target.value);
   };
 
   const inputSubmit = (e) => {
