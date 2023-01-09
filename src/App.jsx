@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import CardInfo from "./components/CardInfo";
+import Loading from "./components/Loading";
 import SearchBar from "./components/SearchBar";
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
   const key = import.meta.env.VITE_API_KEY;
 
   const [city, setCity] = useState("Quito");
-  const [weather, setWeather] = useState();
+  const [weather, setWeather] = useState(null);
 
   // Url to fetch
   const finalUrl = `${url}key=${key}&q=${city}&aqi=no`;
@@ -26,19 +27,20 @@ function App() {
   useEffect(() => {
     //Call to async function
     getInfo().then((response) => setWeather(response));
-    console.log(weather);
   }, []);
 
   useEffect(() => {
+    setWeather(null);
     //Call to async function
-    getInfo().then((response) => setWeather(response));
-    console.log(weather);
+    setTimeout(() => {
+      getInfo().then((response) => setWeather(response));
+    }, [250]);
   }, [city]);
 
   return (
-    <div className="App">
+    <div className="App rounded-md shadow-lg p-4 bg-white">
       <SearchBar setChange={cityHandler} />
-      {weather && (
+      {weather ? (
         <CardInfo
           title={weather.location.name}
           country={weather.location.country}
@@ -48,6 +50,8 @@ function App() {
           lon={weather.location.lon}
           lat={weather.location.lat}
         />
+      ) : (
+        <Loading />
       )}
     </div>
   );

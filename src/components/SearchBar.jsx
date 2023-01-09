@@ -15,14 +15,14 @@ const SearchBar = ({ setChange }) => {
   };
   return (
     <form
-      className="flex gap-4 border rounded-md p-2 items-center"
+      className="flex gap-4 border rounded-md p-2 items-center justify-between"
       onSubmit={inputSubmit}
     >
       <input
         value={city}
         placeholder="Search a city weather"
         onChange={inputHandler}
-        className="px-2 py-1 rounded"
+        className="px-2 py-1 rounded w-full"
       />
       <button>
         <AiOutlineSearch />
